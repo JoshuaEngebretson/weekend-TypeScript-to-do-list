@@ -9,8 +9,16 @@ const toDoListrouter = (0, express_1.Router)();
 // GET
 toDoListrouter.get("/", async (req, res) => {
     let sqlText = `
-        SELECT * FROM "to_do_list"
-        ORDER BY "id";
+        SELECT 
+            id,
+            task,
+            task_note,
+            assigned_to,
+            TO_CHAR(created, 'mm/dd/yyyy') AS created,
+            completed,
+            TO_CHAR(completed_date, 'mm/dd/yyyy') AS completed_date
+        FROM to_do_list
+        ORDER BY id;
     `;
     try {
         const { rows: taskList } = await pool_1.default.query(sqlText);
