@@ -1,0 +1,51 @@
+table {
+	width: 80%;
+	text-align: left;
+	margin: auto;
+	margin-top: 2%;
+}
+
+table,
+th,
+td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	height: 2.15em;
+}
+
+th,
+td {
+	padding: 0.5em;
+	min-width: 3.5em;
+}
+
+thead {
+	background: rgb(232, 245, 255);
+	color: brown;
+	font-size: large;
+}
+
+tbody tr:nth-child(odd) {
+	background: white;
+}
+
+tbody tr:nth-child(even) {
+	background: lightgray;
+}
+
+tbody tr:nth-child(odd).completedTask {
+	background-color: rgb(215, 241, 215);
+}
+
+tbody tr:nth-child(even).completedTask {
+	background-color: rgb(186, 209, 186);
+}
+
+body {
+	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+	background-color: white;
+}
+
+.center-date {
+	text-align: center;
+}

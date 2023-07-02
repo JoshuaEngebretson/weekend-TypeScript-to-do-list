@@ -8,6 +8,7 @@ const jsx_runtime_1 = require("react/jsx-runtime");
 const react_1 = require("react");
 const axios_1 = __importDefault(require("axios"));
 const TaskItem_1 = require("./TaskItem/TaskItem");
+require("./RenderToDoList.css");
 const RenderToDoList = () => {
     const [toDoList, setToDoList] = (0, react_1.useState)([]);
     (0, react_1.useEffect)(() => {

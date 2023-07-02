@@ -19,25 +19,19 @@ export const TaskItem = ({ task, fetchToDoList }: taskItemProps) => {
 		}
 	};
 
-	const deleteTaskButton = () => {
-		const handleDelete = async () => {
-			try {
-				const deleteTask = await axios.delete(`/todo/${task.id}`);
-				fetchToDoList();
-			} catch (error) {
-				console.log(`Error deleting ${task.task}`);
-			}
-		};
-
-		return (
-			<td>
-				<Button onClick={handleDelete}>Delete Task</Button>
-			</td>
-		);
+	const handleDelete = async () => {
+		try {
+			const deleteTask = await axios.delete(`/todo/${task.id}`);
+			fetchToDoList();
+		} catch (error) {
+			console.log(`Error deleting ${task.task}`);
+		}
 	};
 
+	const completed: string = task.completed ? "completedTask" : "";
+
 	return (
-		<tr key={task.id}>
+		<tr key={task.id} className={completed}>
 			<td>{task.task}</td>
 			<td>{task.task_note}</td>
 			<td>{task.assigned_to}</td>
@@ -50,7 +44,9 @@ export const TaskItem = ({ task, fetchToDoList }: taskItemProps) => {
 				</td>
 			)}
 			<td>{task.completed_date}</td>
-			{deleteTaskButton()}
+			<td>
+				<Button onClick={handleDelete}>Delete Task</Button>
+			</td>
 		</tr>
 	);
 };

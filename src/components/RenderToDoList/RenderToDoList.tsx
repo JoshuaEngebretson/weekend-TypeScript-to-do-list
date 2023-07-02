@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { TaskItem } from "./TaskItem/TaskItem";
+import "./RenderToDoList.css";
 
 export type Task = {
 	assigned_to: string;

@@ -18,18 +18,16 @@ const TaskItem = ({ task, fetchToDoList }) => {
             console.log(`Error completing ${task.task}`);
         }
     };
-    const deleteTaskButton = () => {
-        const handleDelete = async () => {
-            try {
-                const deleteTask = await axios_1.default.delete(`/todo/${task.id}`);
-                fetchToDoList();
-            }
-            catch (error) {
-                console.log(`Error deleting ${task.task}`);
-            }
-        };
-        return ((0, jsx_runtime_1.jsx)("td", { children: (0, jsx_runtime_1.jsx)(material_1.Button, { onClick: handleDelete, children: "Delete Task" }) }));
+    const handleDelete = async () => {
+        try {
+            const deleteTask = await axios_1.default.delete(`/todo/${task.id}`);
+            fetchToDoList();
+        }
+        catch (error) {
+            console.log(`Error deleting ${task.task}`);
+        }
     };
-    return ((0, jsx_runtime_1.jsxs)("tr", { children: [(0, jsx_runtime_1.jsx)("td", { children: task.task }), (0, jsx_runtime_1.jsx)("td", { children: task.task_note }), (0, jsx_runtime_1.jsx)("td", { children: task.assigned_to }), (0, jsx_runtime_1.jsx)("td", { children: task.created }), task.completed ? ((0, jsx_runtime_1.jsx)("td", { children: "Completed" })) : ((0, jsx_runtime_1.jsx)("td", { children: (0, jsx_runtime_1.jsx)(material_1.Button, { onClick: handleComplete, children: "Complete Task" }) })), (0, jsx_runtime_1.jsx)("td", { children: task.completed_date }), deleteTaskButton()] }, task.id));
+    const completed = task.completed ? "completedTask" : "";
+    return ((0, jsx_runtime_1.jsxs)("tr", { className: completed, children: [(0, jsx_runtime_1.jsx)("td", { children: task.task }), (0, jsx_runtime_1.jsx)("td", { children: task.task_note }), (0, jsx_runtime_1.jsx)("td", { children: task.assigned_to }), (0, jsx_runtime_1.jsx)("td", { children: task.created }), task.completed ? ((0, jsx_runtime_1.jsx)("td", { children: "Completed" })) : ((0, jsx_runtime_1.jsx)("td", { children: (0, jsx_runtime_1.jsx)(material_1.Button, { onClick: handleComplete, children: "Complete Task" }) })), (0, jsx_runtime_1.jsx)("td", { children: task.completed_date }), (0, jsx_runtime_1.jsx)("td", { children: (0, jsx_runtime_1.jsx)(material_1.Button, { onClick: handleDelete, children: "Delete Task" }) })] }, task.id));
 };
 exports.TaskItem = TaskItem;
