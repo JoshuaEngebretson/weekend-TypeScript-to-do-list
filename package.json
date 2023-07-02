@@ -1,0 +1,59 @@
+{
+	"name": "weekend-typescript-to-do-list",
+	"version": "0.1.0",
+	"private": true,
+	"proxy": "http://localhost:5000",
+	"engines": {
+		"node": "18.x"
+	},
+	"dependencies": {
+		"body-parser": "^1.20.2",
+		"express": "^4.18.2",
+		"pg": "^8.11.1",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-scripts": "5.0.1",
+		"web-vitals": "^2.1.4"
+	},
+	"scripts": {
+		"start": "node server/server.ts",
+		"client": "react-scripts start",
+		"server": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server/server.js\"",
+		"build": "react-scripts build"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@testing-library/jest-dom": "^5.16.5",
+		"@testing-library/react": "^13.4.0",
+		"@testing-library/user-event": "^13.5.0",
+		"@types/cors": "^2.8.13",
+		"@types/express": "^4.17.17",
+		"@types/jest": "^27.5.2",
+		"@types/node": "^20.3.3",
+		"@types/pg": "^8.10.2",
+		"@types/react": "^18.2.14",
+		"@types/react-dom": "^18.2.6",
+		"concurrently": "^8.2.0",
+		"nodemon": "^2.0.22",
+		"ts-node": "^10.9.1",
+		"ts-node-dev": "^2.0.0",
+		"typescript": "^5.1.6"
+	}
+}
