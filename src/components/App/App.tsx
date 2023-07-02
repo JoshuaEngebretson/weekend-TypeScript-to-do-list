@@ -1,49 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
-
-// const tasksCompleted =
+import { ToDoListInputs } from "../ToDoListInputs/ToDoListInputs";
+import { ToDoListHeader } from "../ToDoListHeader/ToDoListHeader";
 
 function App() {
-	const [taskInput, setTaskInput] = useState("");
-	const [assignedToInput, setAssignedToInput] = useState("");
-	const [taskNoteInput, setTaskNoteInput] = useState("");
-
 	return (
 		<div className="App">
-			<header className="App-header">
-				<h1>To-Do List</h1>
-				<p>Tasks Completed: {}</p>
-			</header>
+			<ToDoListHeader />
 
-			<main>
-				<form>
-					<p>
-						<label htmlFor="taskInput">Enter Task</label>
-						<input
-							id="taskInput"
-							type="text"
-							placeholder="Required"
-							value={taskInput}
-						/>
-						<br />
-						<label htmlFor="taskInput">Assigned To</label>
-						<input
-							id="assignedToInput"
-							type="text"
-							placeholder="Required"
-							value={assignedToInput}
-						/>
-						<br />
-						<label htmlFor="taskInput">Task Note</label>
-						<input
-							id="taskNoteInput"
-							type="text"
-							placeholder="Optional"
-							value={taskNoteInput}
-						/>
-					</p>
-				</form>
-			</main>
+			<ToDoListInputs />
 		</div>
 	);
 }
