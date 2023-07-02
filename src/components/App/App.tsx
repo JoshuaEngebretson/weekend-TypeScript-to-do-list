@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
-import { ToDoListInputs } from "../ToDoListInputs/ToDoListInputs";
 import { ToDoListHeader } from "../ToDoListHeader/ToDoListHeader";
 import { RenderToDoList } from "../RenderToDoList/RenderToDoList";
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { TaskItem } from "./TaskItem/TaskItem";
 import "./RenderToDoList.css";
-import { ToDoListInputs } from "../ToDoListInputs/ToDoListInputs";
+import { ToDoListInputs } from "./ToDoListInputs/ToDoListInputs";
 
 export type Task = {
 	assigned_to: string;

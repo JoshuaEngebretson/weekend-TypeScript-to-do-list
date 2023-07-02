@@ -9,7 +9,7 @@ const react_1 = require("react");
 const axios_1 = __importDefault(require("axios"));
 const TaskItem_1 = require("./TaskItem/TaskItem");
 require("./RenderToDoList.css");
-const ToDoListInputs_1 = require("../ToDoListInputs/ToDoListInputs");
+const ToDoListInputs_1 = require("./ToDoListInputs/ToDoListInputs");
 const RenderToDoList = ({ calculateTasksCompleted, }) => {
     const [toDoList, setToDoList] = (0, react_1.useState)([]);
     (0, react_1.useEffect)(() => {
