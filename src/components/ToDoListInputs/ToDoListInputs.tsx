@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import axios from "axios";
 
@@ -8,7 +8,13 @@ const defaultTaskInputs = {
 	taskNote: "",
 };
 
-export const ToDoListInputs = (): JSX.Element => {
+interface ToDoListInputsProps {
+	fetchToDoList: () => Promise<void>;
+}
+
+export const ToDoListInputs = ({
+	fetchToDoList,
+}: ToDoListInputsProps): JSX.Element => {
 	const [taskInputs, setTaskInputs] = useState(defaultTaskInputs);
 	const { task, assignedTo, taskNote } = taskInputs;
 
@@ -26,7 +32,7 @@ export const ToDoListInputs = (): JSX.Element => {
 
 	const handleChange = (
 		event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => {
+	): void => {
 		const { name, value } = event.target;
 		// In taskInputs, set the key/value pair where the key is equal to name
 		setTaskInputs({ ...taskInputs, [name]: value });
@@ -41,7 +47,9 @@ export const ToDoListInputs = (): JSX.Element => {
 	 *      - console logs the taskInputs,
 	 *      - then reset the taskInputs.
 	 */
-	const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (
+		event: FormEvent<HTMLFormElement>
+	): Promise<void> => {
 		event.preventDefault();
 		if (!task || !assignedTo) return; // if required fields are empty, exit the function
 
@@ -50,13 +58,14 @@ export const ToDoListInputs = (): JSX.Element => {
 			console.log("res:", res);
 			console.log("taskInputs:", taskInputs);
 			resetTaskInputs();
+			fetchToDoList();
 		} catch (error) {
 			console.log("Error inside handleSubmit:", error);
 		}
 	};
 
 	return (
-		<main>
+		<div>
 			<form onSubmit={handleSubmit}>
 				<TextField
 					name="task"
@@ -90,6 +99,6 @@ export const ToDoListInputs = (): JSX.Element => {
 					Add Task
 				</Button>
 			</form>
-		</main>
+		</div>
 	);
 };

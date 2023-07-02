@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button } from "@mui/material";
 import { TaskItem } from "./TaskItem/TaskItem";
 import "./RenderToDoList.css";
+import { ToDoListInputs } from "../ToDoListInputs/ToDoListInputs";
 
 export type Task = {
 	assigned_to: string;
@@ -14,20 +14,32 @@ export type Task = {
 	task_note?: string;
 };
 
-export const RenderToDoList = () => {
+interface RenderToDoListProps {
+	calculateTasksCompleted: () => Promise<void>;
+}
+
+export const RenderToDoList = ({
+	calculateTasksCompleted,
+}: RenderToDoListProps): JSX.Element => {
 	const [toDoList, setToDoList] = useState<[Task] | []>([]);
 
 	useEffect(() => {
 		fetchToDoList();
 	}, []);
 
-	const fetchToDoList = async () => {
+	/**
+	 * - Fetch the toDoList array from the database
+	 * - Then setToDoList with the resulting list
+	 */
+	const fetchToDoList = async (): Promise<void> => {
 		const { data: list } = await axios.get("/todo");
 		setToDoList(list);
+		calculateTasksCompleted();
 	};
 
 	return (
 		<div>
+			<ToDoListInputs fetchToDoList={fetchToDoList} />
 			<table>
 				<thead>
 					<tr>

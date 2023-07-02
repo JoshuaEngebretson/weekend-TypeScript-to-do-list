@@ -1,16 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { Task } from "../RenderToDoList";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 interface taskItemProps {
 	task: Task;
 	fetchToDoList: () => Promise<void>;
 }
 
-export const TaskItem = ({ task, fetchToDoList }: taskItemProps) => {
-	const handleComplete = async () => {
-		console.log(`clicked Complete Task for ${task.task}`);
+export const TaskItem = ({
+	task,
+	fetchToDoList,
+}: taskItemProps): JSX.Element => {
+	const {
+		task: activity,
+		task_note,
+		assigned_to,
+		created,
+		completed,
+		completed_date,
+	} = task;
+
+	const handleComplete = async (): Promise<void> => {
 		try {
 			const completeTask = await axios.put(`/todo/${task.id}`);
 			fetchToDoList();
@@ -19,7 +31,7 @@ export const TaskItem = ({ task, fetchToDoList }: taskItemProps) => {
 		}
 	};
 
-	const handleDelete = async () => {
+	const handleDelete = async (): Promise<void> => {
 		try {
 			const deleteTask = await axios.delete(`/todo/${task.id}`);
 			fetchToDoList();
@@ -28,24 +40,41 @@ export const TaskItem = ({ task, fetchToDoList }: taskItemProps) => {
 		}
 	};
 
-	const completed: string = task.completed ? "completedTask" : "";
+	// If the task is completed, completedClass is equal to "completedTask"
+	// Else completedClass is an empty string;
+	const completedClass: string = completed ? "completedTask" : "";
 
 	return (
-		<tr key={task.id} className={completed}>
-			<td>{task.task}</td>
-			<td>{task.task_note}</td>
-			<td>{task.assigned_to}</td>
-			<td>{task.created}</td>
-			{task.completed ? (
+		<tr className={completedClass}>
+			<td>{activity}</td>
+			<td>{task_note}</td>
+			<td>{assigned_to}</td>
+			<td>{created}</td>
+			{/* If the task has been completed, render a td element that states Completed */}
+			{/* Else render a Complete Task button */}
+			{completed ? (
 				<td>Completed</td>
 			) : (
 				<td>
-					<Button onClick={handleComplete}>Complete Task</Button>
+					<Button
+						onClick={handleComplete}
+						variant="contained"
+						color="success"
+						sx={{ fontSize: ".7em" }}
+					>
+						Complete Task
+					</Button>
 				</td>
 			)}
-			<td>{task.completed_date}</td>
+			<td>{completed_date}</td>
 			<td>
-				<Button onClick={handleDelete}>Delete Task</Button>
+				<Button
+					onClick={handleDelete}
+					variant="contained"
+					color="error"
+				>
+					<DeleteForeverIcon />
+				</Button>
 			</td>
 		</tr>
 	);

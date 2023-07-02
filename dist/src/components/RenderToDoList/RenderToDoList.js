@@ -9,17 +9,23 @@ const react_1 = require("react");
 const axios_1 = __importDefault(require("axios"));
 const TaskItem_1 = require("./TaskItem/TaskItem");
 require("./RenderToDoList.css");
-const RenderToDoList = () => {
+const ToDoListInputs_1 = require("../ToDoListInputs/ToDoListInputs");
+const RenderToDoList = ({ calculateTasksCompleted, }) => {
     const [toDoList, setToDoList] = (0, react_1.useState)([]);
     (0, react_1.useEffect)(() => {
         fetchToDoList();
     }, []);
+    /**
+     * - Fetch the toDoList array from the database
+     * - Then setToDoList with the resulting list
+     */
     const fetchToDoList = async () => {
         const { data: list } = await axios_1.default.get("/todo");
         setToDoList(list);
+        calculateTasksCompleted();
     };
-    return ((0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsxs)("table", { children: [(0, jsx_runtime_1.jsx)("thead", { children: (0, jsx_runtime_1.jsxs)("tr", { children: [(0, jsx_runtime_1.jsx)("th", { children: "Task" }), (0, jsx_runtime_1.jsx)("th", { children: "Task Note" }), (0, jsx_runtime_1.jsx)("th", { children: "Assigned To" }), (0, jsx_runtime_1.jsx)("th", { children: "Created" }), (0, jsx_runtime_1.jsx)("th", { children: "Mark Complete" }), (0, jsx_runtime_1.jsx)("th", { children: "Completed Date" }), (0, jsx_runtime_1.jsx)("th", { children: "Delete Task" })] }) }), (0, jsx_runtime_1.jsx)("tbody", { children: toDoList.map((task) => {
-                        return ((0, jsx_runtime_1.jsx)(TaskItem_1.TaskItem, { task: task, fetchToDoList: fetchToDoList }, task.id));
-                    }) })] }) }));
+    return ((0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)(ToDoListInputs_1.ToDoListInputs, { fetchToDoList: fetchToDoList }), (0, jsx_runtime_1.jsxs)("table", { children: [(0, jsx_runtime_1.jsx)("thead", { children: (0, jsx_runtime_1.jsxs)("tr", { children: [(0, jsx_runtime_1.jsx)("th", { children: "Task" }), (0, jsx_runtime_1.jsx)("th", { children: "Task Note" }), (0, jsx_runtime_1.jsx)("th", { children: "Assigned To" }), (0, jsx_runtime_1.jsx)("th", { children: "Created" }), (0, jsx_runtime_1.jsx)("th", { children: "Mark Complete" }), (0, jsx_runtime_1.jsx)("th", { children: "Completed Date" }), (0, jsx_runtime_1.jsx)("th", { children: "Delete Task" })] }) }), (0, jsx_runtime_1.jsx)("tbody", { children: toDoList.map((task) => {
+                            return ((0, jsx_runtime_1.jsx)(TaskItem_1.TaskItem, { task: task, fetchToDoList: fetchToDoList }, task.id));
+                        }) })] })] }));
 };
 exports.RenderToDoList = RenderToDoList;

@@ -13,7 +13,7 @@ const defaultTaskInputs = {
     assignedTo: "",
     taskNote: "",
 };
-const ToDoListInputs = () => {
+const ToDoListInputs = ({ fetchToDoList, }) => {
     const [taskInputs, setTaskInputs] = (0, react_1.useState)(defaultTaskInputs);
     const { task, assignedTo, taskNote } = taskInputs;
     const textFieldStyling = {
@@ -49,11 +49,12 @@ const ToDoListInputs = () => {
             console.log("res:", res);
             console.log("taskInputs:", taskInputs);
             resetTaskInputs();
+            fetchToDoList();
         }
         catch (error) {
             console.log("Error inside handleSubmit:", error);
         }
     };
-    return ((0, jsx_runtime_1.jsx)("main", { children: (0, jsx_runtime_1.jsxs)("form", { onSubmit: handleSubmit, children: [(0, jsx_runtime_1.jsx)(material_1.TextField, { name: "task", type: "text", label: "Enter Task", helperText: "Required", value: task, sx: textFieldStyling, onChange: handleChange }), (0, jsx_runtime_1.jsx)(material_1.TextField, { name: "assignedTo", type: "text", label: "Assigned To", helperText: "Required", value: assignedTo, sx: textFieldStyling, onChange: handleChange }), (0, jsx_runtime_1.jsx)(material_1.TextField, { name: "taskNote", type: "text", label: "Task Note", helperText: "Optional", value: taskNote, sx: textFieldStyling, onChange: handleChange }), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)(material_1.Button, { variant: "contained", type: "submit", children: "Add Task" })] }) }));
+    return ((0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsxs)("form", { onSubmit: handleSubmit, children: [(0, jsx_runtime_1.jsx)(material_1.TextField, { name: "task", type: "text", label: "Enter Task", helperText: "Required", value: task, sx: textFieldStyling, onChange: handleChange }), (0, jsx_runtime_1.jsx)(material_1.TextField, { name: "assignedTo", type: "text", label: "Assigned To", helperText: "Required", value: assignedTo, sx: textFieldStyling, onChange: handleChange }), (0, jsx_runtime_1.jsx)(material_1.TextField, { name: "taskNote", type: "text", label: "Task Note", helperText: "Optional", value: taskNote, sx: textFieldStyling, onChange: handleChange }), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)(material_1.Button, { variant: "contained", type: "submit", children: "Add Task" })] }) }));
 };
 exports.ToDoListInputs = ToDoListInputs;
