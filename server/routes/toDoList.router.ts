@@ -54,14 +54,13 @@ toDoListrouter.post("/", async (req: Request, res: Response) => {
 // PUT
 toDoListrouter.put("/:id", async (req: Request, res: Response) => {
 	let idToUpdate = req.params.id;
-	let completedTask = req.body.completed;
 
 	let sqlText = `
         UPDATE "to_do_list"
-        SET "completed"=$1, "completed_date"=CURRENT_DATE
-        WHERE "id"=$2;
+        SET "completed"=true, "completed_date"=CURRENT_DATE
+        WHERE "id"=$1;
     `;
-	let sqlValues = [completedTask, idToUpdate];
+	let sqlValues = [idToUpdate];
 
 	try {
 		// Send sanitized sql inputs to the database

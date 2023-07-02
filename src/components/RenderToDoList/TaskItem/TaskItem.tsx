@@ -9,26 +9,23 @@ interface taskItemProps {
 }
 
 export const TaskItem = ({ task, fetchToDoList }: taskItemProps) => {
-	const completeTaskButton = () => {
-		const handleComplete = () => {
-			console.log(`clicked Complete Task for ${task.task}`);
-		};
-
-		if (!task.completed)
-			return (
-				<th>
-					<Button onClick={handleComplete}>Complete Task</Button>
-				</th>
-			);
-		return <th></th>;
+	const handleComplete = async () => {
+		console.log(`clicked Complete Task for ${task.task}`);
+		try {
+			const completeTask = await axios.put(`/todo/${task.id}`);
+			fetchToDoList();
+		} catch (error) {
+			console.log(`Error completing ${task.task}`);
+		}
 	};
+
 	const deleteTaskButton = () => {
 		const handleDelete = async () => {
 			try {
 				const deleteTask = await axios.delete(`/todo/${task.id}`);
 				fetchToDoList();
 			} catch (error) {
-				console.log(`Error deleting ${task}`);
+				console.log(`Error deleting ${task.task}`);
 			}
 		};
 
@@ -45,7 +42,13 @@ export const TaskItem = ({ task, fetchToDoList }: taskItemProps) => {
 			<td>{task.task_note}</td>
 			<td>{task.assigned_to}</td>
 			<td>{task.created}</td>
-			{completeTaskButton()}
+			{task.completed ? (
+				<td>Completed</td>
+			) : (
+				<td>
+					<Button onClick={handleComplete}>Complete Task</Button>
+				</td>
+			)}
 			<td>{task.completed_date}</td>
 			{deleteTaskButton()}
 		</tr>
